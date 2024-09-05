@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwxs2is4jn6kr"]
+
+[ext_resource type="Texture2D" uid="uid://djjhjuf3bamja" path="res://bigHill.png" id="1_qdcsx"]
+
+[sub_resource type="GDScript" id="GDScript_gxt4o"]
+script/source = "extends Area2D
+
+@onready var leaderBoard = preload(\"res://control.tscn\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	position = Vector2(900,40)
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	position.x -= 1000 * delta
+	pass
+
+
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if (body.name.contains(\"Character\")):
+		get_tree().change_scene_to_packed(leaderBoard)
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7veni"]
+size = Vector2(123, 631)
+
+[node name="BigHill" type="Area2D"]
+scale = Vector2(0.25, 0.25)
+script = SubResource("GDScript_gxt4o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, 2.5)
+shape = SubResource("RectangleShape2D_7veni")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qdcsx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

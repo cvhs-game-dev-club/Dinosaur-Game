@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://civmy8t7824vt"]
+
+[ext_resource type="Texture2D" uid="uid://c51aaa2o1r5kd" path="res://smallHill.png" id="1_abkui"]
+[ext_resource type="Script" path="res://small_hill.gd" id="1_rdr3c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2t2yh"]
+size = Vector2(126, 321)
+
+[node name="smallHill" type="Area2D"]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_rdr3c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_abkui")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 1.5)
+shape = SubResource("RectangleShape2D_2t2yh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
